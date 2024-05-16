@@ -1,0 +1,61 @@
+const mongoose = require("mongoose");
+
+const bookingSchema = new mongoose.Schema(
+  {
+    leaseId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    name: { type: String },
+    phone: { type: Number },
+    hotel: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Hotel",
+      required: true,
+    },
+    nameHotel: { type: String },
+    rooms: [
+      {
+        roomId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Room",
+        },
+        quantity: {
+          type: Number,
+        },
+        total: {
+          type: Number,
+        },
+        price: {
+          type: Number,
+        },
+        roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
+      },
+    ],
+    checkinDate: {
+      type: Date,
+    },
+    checkoutDate: {
+      type: Date,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+    vnpayId: {
+      type: String,
+    },
+    totalPrice: {
+      type: Number,
+    },
+    status: {
+      type: String,
+      enum: ["pending","confirmed", "checked-in", "checked-out", "cancelled"],
+      default: "pending", // Default value is "confirmed" if not provided
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Booking", bookingSchema);

@@ -1,0 +1,17 @@
+.section__news {
+  margin-top: 150px;
+  padding: 0 130px;
+}
+
+.section__news section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section__news section p {
+  color: var(--book-heading);
+}
+
+.section__news section h2 {
+  margin-bottom: 20px;
+}
